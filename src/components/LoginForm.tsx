@@ -24,8 +24,9 @@ export default function LoginForm() {
   const [teacherInfo, setTeacherInfo] = useState<TeacherInfo>({
     zone: "",
     section: "",
-    school: "School 1",
+    school: "",
     grade: t("grades.grade1"),
+    isNewSchool: false,
     gender: "",
     age: undefined,
     teachingExperience: undefined,
@@ -142,33 +143,81 @@ export default function LoginForm() {
             </select>
           </div>
 
+          {/* School */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               {t("login.school")} *
             </label>
 
             <select
-              value={teacherInfo.school}
-              onChange={(e) =>
+              value={
+                schoolOptions.includes(teacherInfo.school)
+                  ? teacherInfo.school
+                  : teacherInfo.school
+                  ? "__add_new__"
+                  : ""
+              }
+              onChange={(e) => {
+                const value = e.target.value;
+
                 setTeacherInfo((prev) => ({
                   ...prev,
-                  school: e.target.value,
-                }))
-              }
+                  school: value,
+                  isNewSchool: false,
+                }));
+              }}
               className="w-full px-3 py-2 border border-gray-300 rounded-md 
-                     focus:outline-none focus:ring-2 focus:ring-[#82A4DE] 
-                     text-sm sm:text-base text-gray-900 bg-white"
-              required
+                focus:outline-none focus:ring-2 focus:ring-[#82A4DE] 
+                text-sm sm:text-base text-gray-900 bg-white"
+              required={!teacherInfo.isNewSchool}
               disabled={!teacherInfo.zone}
             >
               <option value="">{t("login.selectSchool")}</option>
 
               {schoolOptions.map((schoolId: string) => (
                 <option key={schoolId} value={schoolId}>
-                  {data.schools[schoolId]} {/* translated label */}
+                  {data.schools[schoolId]}
                 </option>
               ))}
             </select>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              className="mr-2"
+              checked={teacherInfo.isNewSchool}
+              onChange={(e) =>
+                setTeacherInfo((prev) => ({
+                  ...prev,
+                  isNewSchool: e.target.checked,
+                  school: "",
+                }))
+              }
+            />
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {t("login.schoolNotInList")}
+            </label>
+          </div>
+
+          <div>
+            {/* New School Input Field */}
+            {teacherInfo.isNewSchool && (
+              <input
+                type="text"
+                placeholder={t("login.enterNewSchool")}
+                className="w-full mt-2 px-3 py-2 border border-gray-300 rounded-md 
+                  focus:outline-none focus:ring-2 text-black focus:ring-[#82A4DE]"
+                value={teacherInfo.school}
+                onChange={(e) =>
+                  setTeacherInfo((prev) => ({
+                    ...prev,
+                    school: e.target.value,
+                  }))
+                }
+                required
+              />
+            )}
           </div>
 
           {/* Section */}

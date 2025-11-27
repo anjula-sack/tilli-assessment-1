@@ -67,6 +67,7 @@ export interface TeacherInfo {
   education?: string;
   selTraining?: string;
   multilingualClassroom?: boolean;
+  isNewSchool: boolean;
   classSize?: number;
   classroomResources?: string[];
   resourcesOther?: string;
