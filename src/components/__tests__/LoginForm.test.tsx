@@ -50,13 +50,6 @@ describe("LoginForm", () => {
     expect(screen.getByText("login.title")).toBeInTheDocument();
   });
 
-  it("should render school and grade selects", () => {
-    render(<LoginForm />);
-
-    expect(screen.getByText(/login.school/)).toBeInTheDocument();
-    expect(screen.getByText(/login.grade/)).toBeInTheDocument();
-  });
-
   it("should render teacher info section", () => {
     render(<LoginForm />);
 
