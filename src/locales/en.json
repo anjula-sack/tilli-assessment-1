@@ -34,6 +34,8 @@
     "zone": "Zone",
     "school": "School",
     "selectSchool": "Select School",
+    "enterNewSchool": "Enter New School",
+    "schoolNotInList": "School is not in the list",
     "grade": "Grade",
     "selectGrade": "Select Grade",
     "section": "Section",
