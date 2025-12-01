@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CheckCircle, Edit, Star } from "lucide-react";
-import { Student, AssessmentRecord } from "@/types";
+import { Student, AssessmentRecord, TeacherInfo } from "@/types";
 import StarRating from "@/components/StarRating";
 import { useNavbar } from "@/components/NavbarContext";
 import { createAssessment, getAssessments, updateScores } from "@/lib/appwrite";
@@ -87,6 +87,7 @@ function ManualEntryContent() {
     useState<AssessmentRecord | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState<string | null>(null);
+  const [teacherInfo, setTeacherInfo] = useState<TeacherInfo | null>(null);
 
   useEffect(() => {
     setBackButton(`/dashboard?testType=${testType}`, t("common.back"));
@@ -95,6 +96,7 @@ function ManualEntryContent() {
 
   useEffect(() => {
     setCurrentUser(localStorage.getItem("sessionId") ?? null);
+    setTeacherInfo(JSON.parse(localStorage.getItem("teacherInfo") ?? "{}"));
 
     const loadUserAndAssessments = async () => {
       try {
@@ -273,16 +275,30 @@ function ManualEntryContent() {
         };
 
         const savedAssessment = await createAssessment(assessmentData);
-        await updateScores({
-          skillScores: skillScores,
-          school: school,
-          grade: grade,
-          section: section,
-          zone: zone,
-          assessment: "teacher_report",
-          overallScore: overallScore,
-          testType: testType,
-        });
+        if (teacherInfo) {
+          await updateScores({
+            skillScores: skillScores,
+            school: teacherInfo.school,
+            grade: teacherInfo.grade,
+            section: teacherInfo.section,
+            zone: teacherInfo.zone,
+            assessment: "teacher_report",
+            overallScore: overallScore,
+            testType: testType,
+          });
+        } else {
+          await updateScores({
+            skillScores: skillScores,
+            school: school,
+            grade: grade,
+            section: section,
+            zone: zone,
+            assessment: "teacher_report",
+            overallScore: overallScore,
+            testType: testType,
+          });
+        }
+
         const assessmentWithId = {
           ...assessmentData,
           $id: savedAssessment.$id,
