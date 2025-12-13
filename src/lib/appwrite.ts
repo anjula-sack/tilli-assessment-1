@@ -1,5 +1,5 @@
-import { Client, Account, Databases, Storage, Query } from "appwrite";
 import { AssessmentRecord, TeacherInfo } from "@/types";
+import { Account, Client, Databases, Query, Storage } from "appwrite";
 
 const client = new Client()
   .setEndpoint("https://fra.cloud.appwrite.io/v1")
@@ -41,7 +41,6 @@ export const login = async (teacherInfo: TeacherInfo) => {
       {
         school: teacherInfo.school,
         section: teacherInfo.section,
-        zone: teacherInfo.zone,
         grade: teacherInfo.grade,
         demographics: JSON.stringify(teacherInfo),
       }
@@ -210,7 +209,6 @@ export const updateScores = async ({
   school,
   grade,
   section,
-  zone,
   assessment,
   overallScore,
   testType,
@@ -227,7 +225,6 @@ export const updateScores = async ({
       Query.equal("school", school),
       Query.equal("grade", grade),
       Query.equal("section", section),
-      Query.equal("zone", zone),
       Query.equal("assessment", assessment),
       Query.equal("testType", testType),
     ]
@@ -251,7 +248,6 @@ export const updateScores = async ({
         school,
         grade,
         section,
-        zone,
         assessment,
         testType,
         total_students: 1,
