@@ -56,7 +56,6 @@ function ManualEntryContent() {
   const school = searchParams.get("school") || "test";
   const grade = searchParams.get("grade") || "test";
   const section = searchParams.get("section") || "test";
-  const zone = searchParams.get("zone") || "test";
   const { setBackButton, hideBackButton } = useNavbar();
   const { t } = useTranslation();
   const rubricData = useRubricData();
@@ -281,7 +280,6 @@ function ManualEntryContent() {
             school: teacherInfo.school,
             grade: teacherInfo.grade,
             section: teacherInfo.section,
-            zone: teacherInfo.zone,
             assessment: "teacher_report",
             overallScore: overallScore,
             testType: testType,
@@ -292,7 +290,6 @@ function ManualEntryContent() {
             school: school,
             grade: grade,
             section: section,
-            zone: zone,
             assessment: "teacher_report",
             overallScore: overallScore,
             testType: testType,
