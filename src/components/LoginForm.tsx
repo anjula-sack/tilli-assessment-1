@@ -168,32 +168,7 @@ export default function LoginForm() {
             )}
           </div>
 
-          {/* Section */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("login.section")} *
-            </label>
-            <select
-              value={teacherInfo.section}
-              onChange={(e) =>
-                setTeacherInfo((prev) => ({
-                  ...prev,
-                  section: e.target.value,
-                }))
-              }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#82A4DE] text-sm sm:text-base text-gray-900 bg-white"
-              required
-            >
-              <option value="">{t("login.selectSection")}</option>
-              {sectionOptions.map((section) => (
-                <option key={section} value={section}>
-                  {t(`sections.${section}`)}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
+           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               {t("login.grade")} *
             </label>
@@ -216,313 +191,29 @@ export default function LoginForm() {
               ))}
             </select>
           </div>
-        </div>
 
-        {/* Demographics and Experience Section */}
-        <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-gray-900 flex items-center">
-            <User className="w-5 h-5 mr-2" />
-            {t("login.demographics")}
-          </h2>
-
-          {/* Gender */}
+          {/* Section */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("login.gender")} *
+              {t("login.section")} *
             </label>
             <select
-              value={teacherInfo.gender || ""}
+              value={teacherInfo.section}
               onChange={(e) =>
                 setTeacherInfo((prev) => ({
                   ...prev,
-                  gender: e.target.value,
+                  section: e.target.value,
                 }))
               }
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#82A4DE] text-sm sm:text-base text-gray-900 bg-white"
               required
             >
-              <option value="">{t("login.selectGender")}</option>
-              <option value="male">{t("login.genderMale")}</option>
-              <option value="female">{t("login.genderFemale")}</option>
-              <option value="other">{t("login.genderOther")}</option>
-              <option value="prefer-not-to-say">
-                {t("login.genderPreferNotToSay")}
-              </option>
-            </select>
-          </div>
-
-          {/* Age and Teaching Experience */}
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                {t("login.age")} *
-              </label>
-              <input
-                type="number"
-                value={teacherInfo.age || ""}
-                onChange={(e) =>
-                  setTeacherInfo((prev) => ({
-                    ...prev,
-                    age: parseInt(e.target.value) || undefined,
-                  }))
-                }
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#82A4DE] text-sm sm:text-base text-gray-900 placeholder-gray-500"
-                placeholder={t("login.agePlaceholder")}
-                required
-                max="100"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                {t("login.teachingExperience")} *
-              </label>
-              <input
-                type="number"
-                value={teacherInfo.teachingExperience || ""}
-                onChange={(e) =>
-                  setTeacherInfo((prev) => ({
-                    ...prev,
-                    teachingExperience: parseInt(e.target.value) || undefined,
-                  }))
-                }
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#82A4DE] text-sm sm:text-base text-gray-900 placeholder-gray-500"
-                placeholder={t("login.teachingExperiencePlaceholder")}
-                required
-                min="0"
-                max="50"
-              />
-            </div>
-          </div>
-
-          {/* Education */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("login.education")} *
-            </label>
-            <select
-              value={teacherInfo.education || ""}
-              onChange={(e) =>
-                setTeacherInfo((prev) => ({
-                  ...prev,
-                  education: e.target.value,
-                }))
-              }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#82A4DE] text-sm sm:text-base text-gray-900 bg-white"
-              required
-            >
-              <option value="">{t("login.selectEducation")}</option>
-              <option value="none">{t("login.educationNone")}</option>
-              <option value="primary">{t("login.educationPrimary")}</option>
-              <option value="middle">{t("login.educationMiddle")}</option>
-              <option value="high">{t("login.educationHigh")}</option>
-              <option value="bachelor">{t("login.educationBachelor")}</option>
-              <option value="master">{t("login.educationMaster")}</option>
-              <option value="doctorate">{t("login.educationDoctorate")}</option>
-            </select>
-          </div>
-
-          {/* SEL Training */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("login.selTraining")} *
-            </label>
-            <select
-              value={teacherInfo.selTraining || ""}
-              onChange={(e) =>
-                setTeacherInfo((prev) => ({
-                  ...prev,
-                  selTraining: e.target.value,
-                }))
-              }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#82A4DE] text-sm sm:text-base text-gray-900 bg-white"
-              required
-            >
-              <option value="">{t("login.selectSelTraining")}</option>
-              <option value="none">{t("login.selTrainingNone")}</option>
-              <option value="limited-theoretical">
-                {t("login.selTrainingLimitedTheoretical")}
-              </option>
-              <option value="limited-practical">
-                {t("login.selTrainingLimitedPractical")}
-              </option>
-              <option value="ongoing-theoretical">
-                {t("login.selTrainingOngoingTheoretical")}
-              </option>
-              <option value="ongoing-practical">
-                {t("login.selTrainingOngoingPractical")}
-              </option>
-              <option value="ongoing-balanced">
-                {t("login.selTrainingOngoingBalanced")}
-              </option>
-            </select>
-          </div>
-
-          {/* Multilingual Classroom */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("login.multilingualClassroom")} *
-            </label>
-            <div className="space-y-2">
-              <label className="flex items-center space-x-2 cursor-pointer text-black">
-                <input
-                  type="radio"
-                  name="multilingual"
-                  value="yes"
-                  checked={teacherInfo.multilingualClassroom === true}
-                  onChange={(e) => {
-                    console.log("Yes radio clicked:", e.target.value);
-                    setTeacherInfo((prev) => ({
-                      ...prev,
-                      multilingualClassroom: true,
-                    }));
-                  }}
-                  className="w-4 h-4"
-                  required
-                />
-                <span className="text-black">{t("login.multilingualYes")}</span>
-              </label>
-              <label className="flex items-center space-x-2 cursor-pointer text-black">
-                <input
-                  type="radio"
-                  name="multilingual"
-                  value="no"
-                  checked={teacherInfo.multilingualClassroom === false}
-                  onChange={(e) => {
-                    console.log("No radio clicked:", e.target.value);
-                    setTeacherInfo((prev) => ({
-                      ...prev,
-                      multilingualClassroom: false,
-                    }));
-                  }}
-                  className="w-4 h-4"
-                />
-                <span className="text-black">{t("login.multilingualNo")}</span>
-              </label>
-            </div>
-          </div>
-
-          {/* Class Size */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("login.classSize")} *
-            </label>
-            <input
-              type="number"
-              value={teacherInfo.classSize || ""}
-              onChange={(e) =>
-                setTeacherInfo((prev) => ({
-                  ...prev,
-                  classSize: parseInt(e.target.value) || undefined,
-                }))
-              }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#82A4DE] text-sm sm:text-base text-gray-900 placeholder-gray-500"
-              placeholder={t("login.classSizePlaceholder")}
-              required
-              min="1"
-              max="100"
-            />
-          </div>
-
-          {/* Classroom Resources */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("login.classroomResources")} *
-            </label>
-            <div className="grid grid-cols-2 gap-2">
-              {[
-                { key: "books", label: t("login.resourcesBooks") },
-                { key: "internet", label: t("login.resourcesInternet") },
-                { key: "smartphone", label: t("login.resourcesSmartphone") },
-                { key: "laptop", label: t("login.resourcesLaptop") },
-                { key: "projector", label: t("login.resourcesProjector") },
-                { key: "smartboard", label: t("login.resourcesSmartBoard") },
-                {
-                  key: "teaching-materials",
-                  label: t("login.resourcesTeachingMaterials"),
-                },
-                { key: "other", label: t("login.resourcesOther") },
-              ].map((resource) => (
-                <label
-                  key={resource.key}
-                  className="flex items-center text-black"
-                >
-                  <input
-                    type="checkbox"
-                    checked={
-                      teacherInfo.classroomResources?.includes(resource.key) ||
-                      false
-                    }
-                    onChange={(e) => {
-                      const currentResources =
-                        teacherInfo.classroomResources || [];
-                      if (e.target.checked) {
-                        setTeacherInfo((prev) => ({
-                          ...prev,
-                          classroomResources: [
-                            ...currentResources,
-                            resource.key,
-                          ],
-                        }));
-                      } else {
-                        setTeacherInfo((prev) => ({
-                          ...prev,
-                          classroomResources: currentResources.filter(
-                            (r) => r !== resource.key
-                          ),
-                        }));
-                      }
-                    }}
-                    className="mr-2"
-                  />
-                  {resource.label}
-                </label>
+              <option value="">{t("login.selectSection")}</option>
+              {sectionOptions.map((section) => (
+                <option key={section} value={section}>
+                  {t(`sections.${section}`)}
+                </option>
               ))}
-            </div>
-            {teacherInfo.classroomResources?.includes("other") && (
-              <input
-                type="text"
-                value={teacherInfo.resourcesOther || ""}
-                onChange={(e) =>
-                  setTeacherInfo((prev) => ({
-                    ...prev,
-                    resourcesOther: e.target.value,
-                  }))
-                }
-                className="w-full mt-2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#82A4DE] text-sm sm:text-base text-gray-900 placeholder-gray-500"
-                placeholder={t("login.resourcesOtherPlaceholder")}
-              />
-            )}
-          </div>
-
-          {/* Resources Sufficiency */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("login.resourcesSufficiency")} *
-            </label>
-            <select
-              value={teacherInfo.resourcesSufficiency || ""}
-              onChange={(e) =>
-                setTeacherInfo((prev) => ({
-                  ...prev,
-                  resourcesSufficiency: e.target.value,
-                }))
-              }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#82A4DE] text-sm sm:text-base text-gray-900 bg-white"
-              required
-            >
-              <option value="">{t("login.selectSufficiency")}</option>
-              <option value="not-sufficient">
-                {t("login.sufficiencyNotSufficient")}
-              </option>
-              <option value="somewhat-sufficient">
-                {t("login.sufficiencySomewhatSufficient")}
-              </option>
-              <option value="sufficient">
-                {t("login.sufficiencySufficient")}
-              </option>
-              <option value="very-sufficient">
-                {t("login.sufficiencyVerySufficient")}
-              </option>
             </select>
           </div>
         </div>

@@ -56,12 +56,6 @@ describe("LoginForm", () => {
     expect(screen.getByText("login.teacherInfo")).toBeInTheDocument();
   });
 
-  it("should render demographics section", () => {
-    render(<LoginForm />);
-
-    expect(screen.getByText("login.demographics")).toBeInTheDocument();
-  });
-
   it("should render submit button", () => {
     render(<LoginForm />);
 
@@ -83,62 +77,7 @@ describe("LoginForm", () => {
     expect(gradeSelect).toBeInTheDocument();
   });
 
-  it("should render gender field", () => {
-    render(<LoginForm />);
 
-    const genderElements = screen.getAllByText(/login.gender/);
-    expect(genderElements.length).toBeGreaterThan(0);
-  });
-
-  it("should render age field", () => {
-    render(<LoginForm />);
-
-    expect(screen.getByText(/login.age/)).toBeInTheDocument();
-  });
-
-  it("should render teaching experience field", () => {
-    render(<LoginForm />);
-
-    expect(screen.getByText(/login.teachingExperience/)).toBeInTheDocument();
-  });
-
-  it("should render education field", () => {
-    render(<LoginForm />);
-
-    const educationElements = screen.getAllByText(/login.education/);
-    expect(educationElements.length).toBeGreaterThan(0);
-  });
-
-  it("should render SEL training field", () => {
-    render(<LoginForm />);
-
-    const selElements = screen.getAllByText(/login.selTraining/);
-    expect(selElements.length).toBeGreaterThan(0);
-  });
-
-  it("should render multilingual classroom field", () => {
-    render(<LoginForm />);
-
-    expect(screen.getByText(/login.multilingualClassroom/)).toBeInTheDocument();
-  });
-
-  it("should render class size field", () => {
-    render(<LoginForm />);
-
-    expect(screen.getByText(/login.classSize/)).toBeInTheDocument();
-  });
-
-  it("should render classroom resources section", () => {
-    render(<LoginForm />);
-
-    expect(screen.getByText(/login.classroomResources/)).toBeInTheDocument();
-  });
-
-  it("should render resources sufficiency field", () => {
-    render(<LoginForm />);
-
-    expect(screen.getByText(/login.resourcesSufficiency/)).toBeInTheDocument();
-  });
 
   it("should render mascot image", () => {
     render(<LoginForm />);
@@ -153,107 +92,7 @@ describe("LoginForm", () => {
     expect(screen.getByText("login.description")).toBeInTheDocument();
   });
 
-  it("should handle age input change", () => {
-    render(<LoginForm />);
 
-    const ageInputs = screen.getAllByRole("spinbutton");
-    const ageInput = ageInputs.find(
-      (input) => input.getAttribute("placeholder") === "login.agePlaceholder"
-    );
-
-    if (ageInput) {
-      fireEvent.change(ageInput, { target: { value: "30" } });
-      expect(ageInput).toHaveValue(30);
-    }
-  });
-
-  it("should handle teaching experience input change", () => {
-    render(<LoginForm />);
-
-    const experienceInputs = screen.getAllByRole("spinbutton");
-    const expInput = experienceInputs.find(
-      (input) =>
-        input.getAttribute("placeholder") ===
-        "login.teachingExperiencePlaceholder"
-    );
-
-    if (expInput) {
-      fireEvent.change(expInput, { target: { value: "5" } });
-      expect(expInput).toHaveValue(5);
-    }
-  });
-
-  it("should handle class size input change", () => {
-    render(<LoginForm />);
-
-    const classSizeInputs = screen.getAllByRole("spinbutton");
-    const classSizeInput = classSizeInputs.find(
-      (input) =>
-        input.getAttribute("placeholder") === "login.classSizePlaceholder"
-    );
-
-    if (classSizeInput) {
-      fireEvent.change(classSizeInput, { target: { value: "25" } });
-      expect(classSizeInput).toHaveValue(25);
-    }
-  });
-
-  it("should handle multilingual yes radio button", () => {
-    render(<LoginForm />);
-
-    const yesRadio = screen.getByDisplayValue("yes");
-    fireEvent.click(yesRadio);
-
-    expect(yesRadio).toBeChecked();
-  });
-
-  it("should handle multilingual no radio button", () => {
-    render(<LoginForm />);
-
-    const noRadio = screen.getByDisplayValue("no");
-    fireEvent.click(noRadio);
-
-    expect(noRadio).toBeChecked();
-  });
-
-  it("should toggle multilingual radio buttons", () => {
-    render(<LoginForm />);
-
-    const yesRadio = screen.getByDisplayValue("yes");
-    const noRadio = screen.getByDisplayValue("no");
-
-    fireEvent.click(yesRadio);
-    expect(yesRadio).toBeChecked();
-    expect(noRadio).not.toBeChecked();
-
-    fireEvent.click(noRadio);
-    expect(noRadio).toBeChecked();
-    expect(yesRadio).not.toBeChecked();
-  });
-
-  it("should handle resource checkbox changes", () => {
-    render(<LoginForm />);
-
-    const checkboxes = screen.getAllByRole("checkbox");
-    expect(checkboxes.length).toBeGreaterThan(0);
-
-    fireEvent.click(checkboxes[0]);
-    expect(checkboxes[0]).toBeChecked();
-  });
-
-  it("should show other resources input when other is selected", () => {
-    render(<LoginForm />);
-
-    // Find and click the "other" checkbox
-    const checkboxes = screen.getAllByRole("checkbox");
-    const otherCheckbox = checkboxes[checkboxes.length - 1]; // Usually last
-
-    fireEvent.click(otherCheckbox);
-
-    // The resources other input should appear
-    const inputs = screen.getAllByRole("textbox");
-    expect(inputs.length).toBeGreaterThan(0);
-  });
 
   it("should handle form submission", async () => {
     const { login } = require("@/lib/appwrite");
@@ -295,110 +134,9 @@ describe("LoginForm", () => {
     }
   });
 
-  it("should render all required field markers", () => {
-    render(<LoginForm />);
 
-    const requiredLabels = screen.getAllByText(/\*/);
-    expect(requiredLabels.length).toBeGreaterThan(5);
-  });
 
-  it("should handle gender selection", async () => {
-    render(<LoginForm />);
 
-    const comboboxes = screen.getAllByRole("combobox");
-    const genderSelect = comboboxes[3]; // school, section, grade, gender
-
-    fireEvent.change(genderSelect, { target: { value: "male" } });
-
-    await waitFor(() => {
-      expect(genderSelect).toHaveValue("male");
-    });
-  });
-
-  it("should handle education selection", async () => {
-    render(<LoginForm />);
-
-    const comboboxes = screen.getAllByRole("combobox");
-    const educationSelect = comboboxes[4]; // school, section, grade, gender, education
-
-    fireEvent.change(educationSelect, { target: { value: "bachelor" } });
-
-    await waitFor(() => {
-      expect(educationSelect).toHaveValue("bachelor");
-    });
-  });
-
-  it("should handle SEL training selection", async () => {
-    render(<LoginForm />);
-
-    const comboboxes = screen.getAllByRole("combobox");
-    const selTrainingSelect = comboboxes[5]; // school, section, grade, gender, education, selTraining
-
-    fireEvent.change(selTrainingSelect, {
-      target: { value: "ongoing-balanced" },
-    });
-
-    await waitFor(() => {
-      expect(selTrainingSelect).toHaveValue("ongoing-balanced");
-    });
-  });
-
-  it("should handle resources sufficiency selection", async () => {
-    render(<LoginForm />);
-
-    const comboboxes = screen.getAllByRole("combobox");
-    const sufficiencySelect = comboboxes[6]; // school, section, grade, gender, education, selTraining, sufficiency
-
-    fireEvent.change(sufficiencySelect, { target: { value: "sufficient" } });
-
-    await waitFor(() => {
-      expect(sufficiencySelect).toHaveValue("sufficient");
-    });
-  });
-
-  it("should handle multiple resource checkbox selections", () => {
-    render(<LoginForm />);
-
-    const checkboxes = screen.getAllByRole("checkbox");
-
-    // Select multiple resources
-    fireEvent.click(checkboxes[0]); // books
-    fireEvent.click(checkboxes[1]); // internet
-    fireEvent.click(checkboxes[2]); // smartphone
-
-    expect(checkboxes[0]).toBeChecked();
-    expect(checkboxes[1]).toBeChecked();
-    expect(checkboxes[2]).toBeChecked();
-  });
-
-  it("should uncheck resource when clicked again", () => {
-    render(<LoginForm />);
-
-    const checkboxes = screen.getAllByRole("checkbox");
-
-    fireEvent.click(checkboxes[0]);
-    expect(checkboxes[0]).toBeChecked();
-
-    fireEvent.click(checkboxes[0]);
-    expect(checkboxes[0]).not.toBeChecked();
-  });
-
-  it("should handle other resources text input", () => {
-    render(<LoginForm />);
-
-    const checkboxes = screen.getAllByRole("checkbox");
-    const otherCheckbox = checkboxes[checkboxes.length - 1];
-
-    // Click other checkbox
-    fireEvent.click(otherCheckbox);
-
-    // Find the text input that appears
-    const textInputs = screen.getAllByRole("textbox");
-    const otherInput = textInputs[textInputs.length - 1];
-
-    fireEvent.change(otherInput, { target: { value: "Custom resource" } });
-    expect(otherInput).toHaveValue("Custom resource");
-  });
 
   it("should display error message on login failure", async () => {
     const { login } = require("@/lib/appwrite");
@@ -455,52 +193,7 @@ describe("LoginForm", () => {
     expect(screen.getByText("login.title")).toBeInTheDocument();
   });
 
-  it("should validate age input constraints", () => {
-    render(<LoginForm />);
 
-    const ageInputs = screen.getAllByRole("spinbutton");
-    const ageInput = ageInputs.find(
-      (input) => input.getAttribute("placeholder") === "login.agePlaceholder"
-    );
-
-    if (ageInput) {
-      expect(ageInput).toHaveAttribute("max", "100");
-      expect(ageInput).toHaveAttribute("required");
-    }
-  });
-
-  it("should validate teaching experience input constraints", () => {
-    render(<LoginForm />);
-
-    const experienceInputs = screen.getAllByRole("spinbutton");
-    const expInput = experienceInputs.find(
-      (input) =>
-        input.getAttribute("placeholder") ===
-        "login.teachingExperiencePlaceholder"
-    );
-
-    if (expInput) {
-      expect(expInput).toHaveAttribute("min", "0");
-      expect(expInput).toHaveAttribute("max", "50");
-      expect(expInput).toHaveAttribute("required");
-    }
-  });
-
-  it("should validate class size input constraints", () => {
-    render(<LoginForm />);
-
-    const classSizeInputs = screen.getAllByRole("spinbutton");
-    const classSizeInput = classSizeInputs.find(
-      (input) =>
-        input.getAttribute("placeholder") === "login.classSizePlaceholder"
-    );
-
-    if (classSizeInput) {
-      expect(classSizeInput).toHaveAttribute("min", "1");
-      expect(classSizeInput).toHaveAttribute("max", "100");
-      expect(classSizeInput).toHaveAttribute("required");
-    }
-  });
 
   it("should have all required fields marked with asterisk", () => {
     render(<LoginForm />);
