@@ -216,6 +216,27 @@ export default function LoginForm() {
               ))}
             </select>
           </div>
+
+          {/* Class Size */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {t("login.classSize")} *
+            </label>
+            <input
+              type="number"
+              min="1"
+              value={teacherInfo.classSize || ""}
+              onChange={(e) =>
+                setTeacherInfo((prev) => ({
+                  ...prev,
+                  classSize: parseInt(e.target.value) || undefined,
+                }))
+              }
+              placeholder={t("login.classSizePlaceholder")}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#82A4DE] text-sm sm:text-base text-gray-900 bg-white"
+              required
+            />
+          </div>
         </div>
 
         <button
