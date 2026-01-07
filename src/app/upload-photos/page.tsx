@@ -10,6 +10,7 @@ import { createAssessment } from "@/lib/appwrite";
 import { useTranslation } from "react-i18next";
 import { AuthService } from "@/lib/auth";
 import { Student } from "@/types";
+import TeacherInfoBanner from "@/components/TeacherInfoBanner";
 
 interface UploadedFile {
   file: File;
@@ -433,6 +434,7 @@ function UploadPhotosContent() {
   return (
     <div className="min-h-screen bg-[#E1ECFF]">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <TeacherInfoBanner />
         {/* Photo Upload Area */}
         <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6 sm:mb-8">
           <div className="flex items-center justify-between mb-4">

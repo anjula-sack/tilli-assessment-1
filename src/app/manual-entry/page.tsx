@@ -10,6 +10,7 @@ import { createAssessment, getAssessments, updateScores } from "@/lib/appwrite";
 import EditAssessmentModal from "@/components/EditAssessmentModal";
 import { useTranslation } from "react-i18next";
 import { useRubricData } from "@/lib/useRubricData";
+import TeacherInfoBanner from "@/components/TeacherInfoBanner";
 
 const skillQuestionMap = {
   self_awareness: ["q1Answer", "q2Answer"],
@@ -99,11 +100,11 @@ function ManualEntryContent() {
 
     const loadUserAndAssessments = async () => {
       try {
-        if (!currentUser) {
+        if (!currentUser || !teacherInfo) {
           return;
         }
 
-        const assessments = await getAssessments(currentUser);
+        const assessments = await getAssessments(teacherInfo?.school, teacherInfo?.section, teacherInfo?.grade, testType);
         setSavedAssessments(assessments);
       } catch (error) {
         console.error("Error loading user and assessments:", error);
@@ -347,6 +348,7 @@ function ManualEntryContent() {
   return (
     <div className="min-h-screen bg-[#E1ECFF]">
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <TeacherInfoBanner />
         {/* Saved Assessments View */}
         <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6 sm:mb-8">
           <div className="mb-6">

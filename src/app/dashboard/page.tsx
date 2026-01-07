@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Sparkles, Camera } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import i18n from "@/lib/i18n";
+import TeacherInfoBanner from "@/components/TeacherInfoBanner";
 
 export const dynamic = "force-dynamic";
 
@@ -27,6 +28,7 @@ function Dashboard() {
     >
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <TeacherInfoBanner />
         <div className={`text-center mb-8 sm:mb-12`}>
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-4">
             {t("dashboard.title")}
