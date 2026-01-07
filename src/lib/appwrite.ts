@@ -42,6 +42,7 @@ export const login = async (teacherInfo: TeacherInfo) => {
         school: teacherInfo.school,
         section: teacherInfo.section,
         grade: teacherInfo.grade,
+        classSize: teacherInfo.classSize,
         demographics: JSON.stringify(teacherInfo),
       }
     );

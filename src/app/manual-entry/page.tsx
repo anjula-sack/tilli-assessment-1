@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { CheckCircle, Edit, Star } from "lucide-react";
+import { CheckCircle, Edit, Star, PartyPopper, X } from "lucide-react";
 import { Student, AssessmentRecord, TeacherInfo } from "@/types";
 import StarRating from "@/components/StarRating";
 import { useNavbar } from "@/components/NavbarContext";
@@ -88,6 +88,7 @@ function ManualEntryContent() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState<string | null>(null);
   const [teacherInfo, setTeacherInfo] = useState<TeacherInfo | null>(null);
+  const [showCompletionPopup, setShowCompletionPopup] = useState(false);
 
   useEffect(() => {
     setBackButton(`/dashboard?testType=${testType}`, t("common.back"));
@@ -100,11 +101,11 @@ function ManualEntryContent() {
 
     const loadUserAndAssessments = async () => {
       try {
-        if (!currentUser || !teacherInfo) {
+        if (!currentUser) {
           return;
         }
 
-        const assessments = await getAssessments(teacherInfo?.school, teacherInfo?.section, teacherInfo?.grade, testType);
+        const assessments = await getAssessments(currentUser);
         setSavedAssessments(assessments);
       } catch (error) {
         console.error("Error loading user and assessments:", error);
@@ -115,6 +116,16 @@ function ManualEntryContent() {
 
     loadUserAndAssessments();
   }, [router, currentUser]);
+
+  useEffect(() => {
+    if (
+      teacherInfo?.classSize &&
+      savedAssessments.length >= teacherInfo.classSize &&
+      savedAssessments.length > 0
+    ) {
+      setShowCompletionPopup(true);
+    }
+  }, [savedAssessments.length, teacherInfo?.classSize]);
 
   const removeStudent = (index: number) => {
     if (students.length > 1) {
@@ -601,6 +612,39 @@ function ManualEntryContent() {
           onSave={handleAssessmentUpdate}
           teacherId={currentUser || ""}
         />
+
+        {/* Completion Popup */}
+        {showCompletionPopup && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 animate-in fade-in duration-300">
+            <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-sm w-full text-center relative overflow-hidden animate-in zoom-in-95 duration-300">
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 to-indigo-500"></div>
+              <button
+                onClick={() => setShowCompletionPopup(false)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+                aria-label="Close"
+              >
+                <X size={20} />
+              </button>
+              <div className="mb-6 flex justify-center">
+                <div className="bg-blue-50 p-4 rounded-full">
+                  <PartyPopper className="w-12 h-12 text-blue-600" />
+                </div>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                {t("common.success")}!
+              </h3>
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                {t("manualEntry.allEntriesAdded")}
+              </p>
+              <button
+                onClick={() => setShowCompletionPopup(false)}
+                className="w-full bg-[#4F86E2] text-white py-3 px-6 rounded-xl hover:bg-[#3d6bc7] transition-all font-semibold shadow-lg shadow-blue-200"
+              >
+                {t("common.done") || "Done"}
+              </button>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
