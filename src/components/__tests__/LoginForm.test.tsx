@@ -302,78 +302,10 @@ describe("LoginForm", () => {
     expect(requiredLabels.length).toBeGreaterThan(5);
   });
 
-  it("should handle zone selection and enable school dropdown", async () => {
-    render(<LoginForm />);
 
-    const zoneSelect = screen.getAllByRole("combobox")[0];
-    let schoolSelect = screen.getAllByRole("combobox")[1];
 
-    // School should be disabled initially
-    expect(schoolSelect).toBeDisabled();
 
-    // Select a zone (use actual zone ID from zonesToSchools)
-    fireEvent.change(zoneSelect, { target: { value: "irbid" } });
 
-    // Wait for state update
-    await waitFor(() => {
-      schoolSelect = screen.getAllByRole("combobox")[1];
-      expect(schoolSelect).not.toBeDisabled();
-    });
-  });
-
-  it("should handle gender selection", async () => {
-    render(<LoginForm />);
-
-    const comboboxes = screen.getAllByRole("combobox");
-    const genderSelect = comboboxes[4]; // zone, school, section, grade, gender
-
-    fireEvent.change(genderSelect, { target: { value: "male" } });
-
-    await waitFor(() => {
-      expect(genderSelect).toHaveValue("male");
-    });
-  });
-
-  it("should handle education selection", async () => {
-    render(<LoginForm />);
-
-    const comboboxes = screen.getAllByRole("combobox");
-    const educationSelect = comboboxes[5]; // zone, school, section, grade, gender, education
-
-    fireEvent.change(educationSelect, { target: { value: "bachelor" } });
-
-    await waitFor(() => {
-      expect(educationSelect).toHaveValue("bachelor");
-    });
-  });
-
-  it("should handle SEL training selection", async () => {
-    render(<LoginForm />);
-
-    const comboboxes = screen.getAllByRole("combobox");
-    const selTrainingSelect = comboboxes[6]; // zone, school, section, grade, gender, education, selTraining
-
-    fireEvent.change(selTrainingSelect, {
-      target: { value: "ongoing-balanced" },
-    });
-
-    await waitFor(() => {
-      expect(selTrainingSelect).toHaveValue("ongoing-balanced");
-    });
-  });
-
-  it("should handle resources sufficiency selection", async () => {
-    render(<LoginForm />);
-
-    const comboboxes = screen.getAllByRole("combobox");
-    const sufficiencySelect = comboboxes[7]; // zone, school, section, grade, gender, education, selTraining, sufficiency
-
-    fireEvent.change(sufficiencySelect, { target: { value: "sufficient" } });
-
-    await waitFor(() => {
-      expect(sufficiencySelect).toHaveValue("sufficient");
-    });
-  });
 
   it("should handle multiple resource checkbox selections", () => {
     render(<LoginForm />);
@@ -525,7 +457,6 @@ describe("LoginForm", () => {
     render(<LoginForm />);
 
     // Check for required field labels
-    expect(screen.getByText(/login.zone.*\*/)).toBeInTheDocument();
     expect(screen.getByText(/login.school.*\*/)).toBeInTheDocument();
     expect(screen.getByText(/login.grade.*\*/)).toBeInTheDocument();
   });
@@ -561,11 +492,4 @@ describe("LoginForm", () => {
     });
   });
 
-  it("should render zone dropdown with correct structure", () => {
-    render(<LoginForm />);
-
-    const zoneSelect = screen.getAllByRole("combobox")[0];
-    expect(zoneSelect).toBeInTheDocument();
-    expect(zoneSelect).toHaveValue("");
-  });
 });

@@ -9,8 +9,8 @@ export default function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
 
   const languages = [
-    { code: "en", name: "English", flag: "🇺🇸" },
-    { code: "ar", name: "العربية", flag: "🇸🇦" },
+    { code: "en", name: "English" },
+    { code: "ar", name: "العربية" },
   ];
 
   const currentLanguage =
@@ -32,7 +32,6 @@ export default function LanguageSwitcher() {
         className="flex items-center space-x-2 text-white hover:text-white/80 px-3 py-2 rounded-md hover:bg-white/10 transition-colors"
       >
         <Globe size={18} />
-        <span className="text-sm font-medium">{currentLanguage.flag}</span>
         <span className="text-sm font-medium hidden sm:inline">
           {currentLanguage.name}
         </span>
@@ -58,7 +57,6 @@ export default function LanguageSwitcher() {
                     : "text-gray-700"
                 }`}
               >
-                <span className="text-lg">{language.flag}</span>
                 <span className="font-medium">{language.name}</span>
                 {i18n.language === language.code && (
                   <span className="ml-auto text-blue-600">✓</span>

@@ -22,7 +22,6 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [teacherInfo, setTeacherInfo] = useState<TeacherInfo>({
-    zone: "",
     section: "",
     school: "",
     grade: t("grades.grade1"),
@@ -41,34 +40,9 @@ export default function LoginForm() {
 
   const data: any = i18n.language === "ar" ? arData : enData;
 
-  const handleZoneChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const zone = e.target.value;
-
-    setTeacherInfo((prev) => ({
-      ...prev,
-      zone,
-      school: "",
-    }));
-  };
-
-  const schoolOptions = teacherInfo.zone
-    ? data.zonesToSchools[teacherInfo.zone]
-    : [];
-
-  const gradeOptions = ["grade1"];
-  const sectionOptions = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-  ];
+  const schoolOptions = Object.keys(data.schools);
+  const gradeOptions = Object.keys(data.grades);
+  const sectionOptions = Object.keys(data.sections);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -118,31 +92,6 @@ export default function LoginForm() {
             {t("login.teacherInfo")}
           </h2>
 
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("login.zone")} *
-            </label>
-
-            <select
-              value={teacherInfo.zone}
-              onChange={handleZoneChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md 
-                     focus:outline-none focus:ring-2 focus:ring-[#82A4DE] 
-                     text-sm sm:text-base text-gray-900 bg-white"
-              required
-            >
-              <option value="">
-                {i18n.language === "ar" ? "اختر المنطقة" : "Select Zone"}
-              </option>
-
-              {Object.entries(data.zones).map(([zoneId, zoneName]) => (
-                <option key={zoneId} value={zoneId}>
-                  {zoneName as string}
-                </option>
-              ))}
-            </select>
-          </div>
-
           {/* School */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -170,76 +119,12 @@ export default function LoginForm() {
                 focus:outline-none focus:ring-2 focus:ring-[#82A4DE] 
                 text-sm sm:text-base text-gray-900 bg-white"
               required={!teacherInfo.isNewSchool}
-              disabled={!teacherInfo.zone}
             >
               <option value="">{t("login.selectSchool")}</option>
 
               {schoolOptions.map((schoolId: string) => (
                 <option key={schoolId} value={schoolId}>
                   {data.schools[schoolId]}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              className="mr-2"
-              checked={teacherInfo.isNewSchool}
-              onChange={(e) =>
-                setTeacherInfo((prev) => ({
-                  ...prev,
-                  isNewSchool: e.target.checked,
-                  school: "",
-                }))
-              }
-            />
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("login.schoolNotInList")}
-            </label>
-          </div>
-
-          <div>
-            {/* New School Input Field */}
-            {teacherInfo.isNewSchool && (
-              <input
-                type="text"
-                placeholder={t("login.enterNewSchool")}
-                className="w-full mt-2 px-3 py-2 border border-gray-300 rounded-md 
-                  focus:outline-none focus:ring-2 text-black focus:ring-[#82A4DE]"
-                value={teacherInfo.school}
-                onChange={(e) =>
-                  setTeacherInfo((prev) => ({
-                    ...prev,
-                    school: e.target.value,
-                  }))
-                }
-                required
-              />
-            )}
-          </div>
-
-          {/* Section */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("login.section")} *
-            </label>
-            <select
-              value={teacherInfo.section}
-              onChange={(e) =>
-                setTeacherInfo((prev) => ({
-                  ...prev,
-                  section: e.target.value,
-                }))
-              }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#82A4DE] text-sm sm:text-base text-gray-900 bg-white"
-              required
-            >
-              <option value="">{t("login.selectSection")}</option>
-              {sectionOptions.map((section) => (
-                <option key={section} value={section}>
-                  {t(`sections.${section}`)}
                 </option>
               ))}
             </select>
@@ -264,6 +149,31 @@ export default function LoginForm() {
               {gradeOptions.map((grade) => (
                 <option key={grade} value={grade}>
                   {t(`grades.${grade}`)}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Section */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {t("login.section")} *
+            </label>
+            <select
+              value={teacherInfo.section}
+              onChange={(e) =>
+                setTeacherInfo((prev) => ({
+                  ...prev,
+                  section: e.target.value,
+                }))
+              }
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#82A4DE] text-sm sm:text-base text-gray-900 bg-white"
+              required
+            >
+              <option value="">{t("login.selectSection")}</option>
+              {sectionOptions.map((section) => (
+                <option key={section} value={section}>
+                  {t(`sections.${section}`)}
                 </option>
               ))}
             </select>
