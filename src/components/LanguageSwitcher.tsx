@@ -10,7 +10,7 @@ export default function LanguageSwitcher() {
 
   const languages = [
     { code: "en", name: "English" },
-    { code: "ar", name: "العربية" },
+    { code: "ta", name: "தமிழ்" },
   ];
 
   const currentLanguage =

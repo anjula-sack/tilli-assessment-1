@@ -124,7 +124,7 @@ export default function LoginForm() {
 
               {schoolOptions.map((schoolId: string) => (
                 <option key={schoolId} value={schoolId}>
-                  {data.schools[schoolId]}
+                  {t(`schools.${schoolId}`)}
                 </option>
               ))}
             </select>

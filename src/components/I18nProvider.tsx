@@ -23,9 +23,8 @@ export default function I18nProvider({ children }: I18nProviderProps) {
 
   useEffect(() => {
     const langParam = searchParams.get("lang");
-    if (langParam && (langParam === "en" || langParam === "ar")) {
+    if (langParam && (langParam === "en" || langParam === "ta")) {
       i18n.changeLanguage(langParam);
-      document.documentElement.dir = langParam === "ar" ? "rtl" : "ltr";
       document.documentElement.lang = langParam;
     }
   }, [searchParams]);

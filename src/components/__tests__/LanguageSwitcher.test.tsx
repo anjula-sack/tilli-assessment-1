@@ -51,7 +51,7 @@ describe("LanguageSwitcher", () => {
 
     // Both language options should show their names
     expect(screen.getAllByText("English").length).toBeGreaterThan(0);
-    expect(screen.getByText("العربية")).toBeInTheDocument();
+    expect(screen.getByText("தமிழ்")).toBeInTheDocument();
   });
 
   it("should show checkmark for current language", () => {
