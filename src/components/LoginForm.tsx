@@ -95,7 +95,7 @@ export default function LoginForm() {
           {/* School */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              {t("login.school")} *
+              {t("login.branch")} *
             </label>
 
             <select
@@ -120,7 +120,7 @@ export default function LoginForm() {
                 text-sm sm:text-base text-gray-900 bg-white"
               required={!teacherInfo.isNewSchool}
             >
-              <option value="">{t("login.selectSchool")}</option>
+              <option value="">{t("login.selectBranch")}</option>
 
               {schoolOptions.map((schoolId: string) => (
                 <option key={schoolId} value={schoolId}>
