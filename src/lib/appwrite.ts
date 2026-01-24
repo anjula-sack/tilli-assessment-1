@@ -2,7 +2,7 @@ import { Client, Account, Databases, Storage, Query } from "appwrite";
 import { AssessmentRecord, TeacherInfo } from "@/types";
 
 const client = new Client()
-  .setEndpoint("https://fra.cloud.appwrite.io/v1")
+  .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT || "")
   .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID || "");
 
 export const account = new Account(client);
