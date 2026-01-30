@@ -290,19 +290,21 @@
   },
   "schools": {
     "leeds_panadura": "Panadura",
-    "leeds_matara": "Matara",
-    "leeds_galle": "Galle",
-    "leeds_horana": "Horana",
     "leeds_ambalangoda": "Ambalangoda",
-    "leeds_matugama": "Matugama",
-    "leeds_tangalle": "Tangalle",
-    "leeds_piliyandala": "Piliyandala",
     "leeds_bandaragama": "Bandaragama",
-    "leeds_maharagama": "Maharagama",
+    "leads_boralesgamuwa": "Boralesgamuwa",
+    "leeds_embilipitiya": "Embilipitiya",
+    "leeds_galle": "Galle",
     "leeds_homagama": "Homagama",
-    "leeds_malabe": "Malabe",
-    "leeds_tissamaharama": "Tissamaharama",
+    "leeds_horana": "Horana",
     "leeds_maggona": "Maggona",
-    "leeds_embilipitiya": "Embilipitiya"
+    "leeds_maharagama": "Maharagama",
+    "leeds_matugama": "Matugama",
+    "leeds_malabe": "Malabe",
+    "leeds_matara": "Matara",
+    "leeds_piliyandala": "Piliyandala",
+    "leeeds_tangalle": "Tangalle",
+    "leeds_tissamaharama": "Tissamaharama",
+    "leeds_walgama": "Walgama"
   }
 }
