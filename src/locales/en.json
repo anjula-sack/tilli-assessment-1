@@ -119,14 +119,13 @@
     }
   },
   "grades": {
+    "preK": "Pre-K",
     "grade1": "Grade 1",
     "grade2": "Grade 2",
     "grade3": "Grade 3",
     "grade4": "Grade 4",
     "grade5": "Grade 5",
-    "grade6": "Grade 6",
-    "grade7": "Grade 7",
-    "grade8": "Grade 8"
+    "grade6": "Grade 6"
   },
   "sections": {
     "a": "A",
@@ -289,22 +288,15 @@
     }
   },
   "schools": {
-    "leeds_panadura": "Panadura",
-    "leeds_ambalangoda": "Ambalangoda",
-    "leeds_bandaragama": "Bandaragama",
-    "leads_boralesgamuwa": "Boralesgamuwa",
-    "leeds_embilipitiya": "Embilipitiya",
-    "leeds_galle": "Galle",
-    "leeds_homagama": "Homagama",
-    "leeds_horana": "Horana",
-    "leeds_maggona": "Maggona",
-    "leeds_maharagama": "Maharagama",
-    "leeds_matugama": "Matugama",
-    "leeds_malabe": "Malabe",
-    "leeds_matara": "Matara",
-    "leeds_piliyandala": "Piliyandala",
-    "leeeds_tangalle": "Tangalle",
-    "leeds_tissamaharama": "Tissamaharama",
-    "leeds_walgama": "Walgama"
+    "lk0901_happy_home": "LK0901 - Happy home",
+    "lk0904_light_of_the_world": "LK0904 - Light of the world",
+    "lk0905_gods_love": "LK0905 - God's Love",
+    "lk0908_navajeevanam_child_development_center": "LK0908 - Navajeevanam Child Development Center",
+    "lk0914_cepha_child_development_center": "LK0914 - Cepha Child Development Center",
+    "lk0924_kaarunyam_child_development_center": "LK0924 - Kaarunyam Child Development Center",
+    "lk0929_light_of_the_life": "LK0929 - Light of the life",
+    "lk0942_calvary_elim_new_life_center": "LK0942 - Calvary Elim New Life Center",
+    "lk0949_irakkam_child_development_center": "LK0949 - Irakkam Child Development Center",
+    "lk0950_st_pauls_child_development_center": "LK0950 - St. Paul’s Child Development Center"
   }
 }

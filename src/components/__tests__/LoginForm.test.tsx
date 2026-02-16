@@ -457,7 +457,7 @@ describe("LoginForm", () => {
     render(<LoginForm />);
 
     // Check for required field labels
-    expect(screen.getByText(/login.branch.*\*/)).toBeInTheDocument();
+    expect(screen.getByText(/login.school.*\*/)).toBeInTheDocument();
     expect(screen.getByText(/login.grade.*\*/)).toBeInTheDocument();
   });
 
